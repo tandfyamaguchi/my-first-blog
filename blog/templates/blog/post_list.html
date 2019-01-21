@@ -9,11 +9,14 @@
         <h1><a href="/">Yamaguchi's Django Girls Blog</a></h1>
     </div>
 
-    <dev>
-        <p>published: 12.1.2019</p>
-        <h2><a href="">My first post</a></h2>
-        <p>Hello.</p>
-    </dev>
+    {% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr}}</p>
+        <!-- |linebreaksbr はpostのテキスト中の改行を段落に変換する -->
+    </div>
+    {% endfor %}
 </body>
 
 </html>
