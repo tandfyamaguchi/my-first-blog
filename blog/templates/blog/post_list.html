@@ -1,22 +1,17 @@
-<html>
+{% extends 'blog/base.html' %}
 
-<head>
-    <title>Yamaguchi's Django Girls Blog</title>
-</head>
-
-<body>
-    <div>
-        <h1><a href="/">Yamaguchi's Django Girls Blog</a></h1>
-    </div>
-
-    {% for post in posts %}
-    <div>
+{% block content %}
+{% for post in posts %}
+<div class="post">
+    <div calss="date">
         <p>published: {{ post.published_date }}</p>
-        <h1><a href="">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaksbr}}</p>
-        <!-- |linebreaksbr はpostのテキスト中の改行を段落に変換する -->
     </div>
-    {% endfor %}
-</body>
-
-</html>
+    <!-- { % % }はDjangoのテンプレートタグを使用
+    post_detailはblog/urls.pyに書かれたname=post_detailのurl
+    pkはプライマリキー -->
+    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+    <p>{{ post.text|linebreaksbr}}</p>
+    <!-- |linebreaksbr はpostのテキスト中の改行を段落に変換する -->
+</div>
+{% endfor %}
+{% endblock %}
